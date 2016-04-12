@@ -1,3 +1,4 @@
+#import corresponding module
 from dolfin import *
 from meshCreator import *
 from schrodinger import schrodingerEq
@@ -9,13 +10,15 @@ from poisson import poissonEq
 import time
 import sys
 
-#strat timing
+#start timing
 start = time.clock()
 
-#constnats
+#constants
 #band_offset = 0.24 #eV
 evA2tocm3 = 7.53858e30
 q = 1.602e-19
+
+#system input fermi energy with python main.py 0.0
 fermiEnergy = float(sys.argv[1])
 
 meshArray = meshFunc()
@@ -33,9 +36,12 @@ n = interpolate(Expression("1"), V)
 k = 0
 while k < 10:
   print str(k+1) + ' iteration'
+  # get the eigenvalues and eigenfunctions
   eigenvalues, eigenvectors, u, rx_list = schrodingerEq(potential, meshArray, fermiEnergy)
+  # find the electron density 
   nk = electronOccupationState(eigenvalues, fermiEnergy)
   new_n = electronDensityFunction(eigenvectors, nk)
+  # solve the poisson equation
   phi = poissonEq(new_n,meshArray)
 
 
@@ -43,13 +49,19 @@ while k < 10:
   #get the new potential V(x) = -q phi(x) + band_offset
   new_potential = Function(V)
   new_potential.vector()[:] = np.array([-q*j for j in phi.vector()[:]])
-  
-  for i in range(len(new_potential.vector())):
-    new_potential.vector()[i] = new_potential.vector()[i] + band_offset.vector()[i]
-  
+ 
+  print len(new_potential.vector()) 
+  #for i in range(len(new_potential.vector())):
+   # import pdb
+   # pdb.set_trace()
+   # new_potential.vector()[i] = new_potential.vector()[i] + band_offset.vector()[i]
+  #print len(new_potential.vector()[i])
+
   print '\n'
 
-  #convergence
+  #convergence 
+  # this loop will run until we reach a convergent solution, or we reach our
+  # maximum number of iterations, given by
   print 'convergence'
   v_error = []
   n_error = []
@@ -111,6 +123,7 @@ Ie1 = interpolate(e1,V)
 Ie2 = interpolate(e2,V)
 Ie3 = interpolate(e3,V)
 
+#save the output
 output = open("out.txt", "w+")
 
 coor = mesh.coordinates()
@@ -121,7 +134,8 @@ if mesh.num_vertices() == len(u_array)+1:
 
 
 plot(Iv1, axes=True, title='Electron Density n(x)')
-
+plt.figure()
+plt.scatter(Iv1,Ie1)
 plot(Ie1, axes=True, title='Wave Function psi1(x)')
 plot(Ie2, axes=True, title='Wave Function psi2(x)')
 plot(Ie3, axes=True, title='Wave Function psi3(x)')

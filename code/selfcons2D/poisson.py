@@ -7,14 +7,14 @@ from scipy import constants as pc
 nd = 1.0e18 * (1e-16) * 1e-6 #1/A^2
 e0 = Constant(1.0/8.854188e-22) #Farad per Angstroms
 q = Constant(pc.c)
-e_g = Constant(13.1)
-e_a = Constant((12.248))
+e_g = Constant(13.1)  #dielectric constant for GaAs
+e_a = Constant((12.248)) #dielectric constant for AlGaAs
 
 qe0 = q/e0
 
 #create mesh
 #nx = 40;  ny = 20
-mesh = RectangleMesh(x0, y0, xf, yf, nx, ny)
+mesh = RectangleMesh(Point(x0, y0), Point(xf, yf), nx, ny)
 
 
 def poissonEq(electronDensity, meshArray):

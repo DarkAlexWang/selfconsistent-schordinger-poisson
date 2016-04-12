@@ -12,8 +12,7 @@ gaas_thickness2 = 500.0
 
 total_width = gaas_thickness1 + algaas_thickness1  + algaas_thickness2 + gaas_thickness2
 
-#MESH
-
+#MESH																																																																								
 nx = 30;  ny = 30
 x0, y0 = 0.0, 0.0
 xf, yf = total_width, total_width

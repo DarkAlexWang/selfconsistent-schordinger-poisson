@@ -12,7 +12,7 @@ band_offset_value = 0.24 #ev
 
 #create mesh
 #nx = 20;  ny = 20
-mesh = RectangleMesh(x0, y0, xf, yf, nx, ny)
+mesh = RectangleMesh(Point(x0, y0), Point(xf, yf), nx, ny)
 
 def schrodingerEq(potential, meshArray, fermiEnergy):  
  

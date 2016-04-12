@@ -8,7 +8,7 @@ from scipy import constants as pc
 hb2m = 3.81 #ev*A^2
 nk_factor =  1.0/pc.pi * 1.0/2/(hb2m)#pc.m_e/(pc.pi * pc.hbar * pc.hbar * 1e40)
 K = 8.6173324e-5 #ev K^-1
-T = 4.0
+T = 4.0 # temperature
 
 
 #function to return the electron occupation state nk
@@ -24,7 +24,7 @@ def electronOccupationState(eigenvalues, fermiEnergy):
 
  return nk
 
-#fuction to calculate the electro density
+#fuction to calculate the electron density
 def electronDensityFunction(eigenvectors,  nk):
  print 'Finding the electron density function n(x)'
  result = []
