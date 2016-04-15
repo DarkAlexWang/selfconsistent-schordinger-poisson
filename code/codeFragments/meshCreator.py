@@ -67,7 +67,7 @@ for cell_no in range(len(subdomains.array())):
 plot(k, title='dielectric', axes=True)
 plot(m_eff, title='effective mass', axes=True)
 plot(nd , title='doping', axes = True)
-
+interactive()
 #plot(subdomains, title='subdomains')
 #***************************************************************
 
