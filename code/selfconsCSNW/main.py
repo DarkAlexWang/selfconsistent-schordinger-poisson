@@ -6,8 +6,6 @@ Date 04/14/2016  Modified 04/14/2016
 
 '''
 
-
-
 #import corresponding module
 from dolfin import *
 from meshCreator import *

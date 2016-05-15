@@ -42,12 +42,10 @@ right = Rectangle(dolfin.Point(-1/sqrt(3)*radius, -radius), \
 left = CSGRotation(left, dolfin.Point(0, 0), -pi/3)
 right = CSGRotation(right, dolfin.Point(0, 0), pi/3)
 
-domain = Rectangle(dolfin.Point(-1/sqrt(3)*radius, -1*radius), \
-        dolfin.Point(1/sqrt(3)*radius, 1*radius))
-#domain = middle + left + right
+domain = middle + left + right
 
 #domain.set_subdomain(1, Rectangle(dolfin.Point(20, 20), dolfin.Point(50, 50)))
-domain.set_subdomain(1, middle+left+right)
+#domain.set_subdomain(1, middle+left+right)
 
 # Define the inner core of nanowire
 imiddle = Rectangle(dolfin.Point(-1/sqrt(3)*iradius, -iradius), \
@@ -71,7 +69,7 @@ dolfin.info("\nVerbose output of 2D geometry:")
 dolfin.info(domain, True)
 
 # Generate and plot mesh
-mesh2d = generate_mesh(domain, 45)
+mesh2d = generate_mesh(domain, 20)
 print mesh2d
 dolfin.plot(mesh2d, "2D mesh")
 

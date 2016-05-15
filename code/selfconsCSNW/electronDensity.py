@@ -1,12 +1,11 @@
-'''
+"""
 2D Poisson-Schrodinger equation self-consistant solver for a core-shell 
 hexagonal nanowire, the mesh is produced by mshr.
 Created by Zhihuan Wang
 Date 04/14/2016  Modified 04/14/2016
+"""
 
-'''
-
-mport mpmath
+import mpmath
 from scipy import inf
 import numpy as np
 import math
